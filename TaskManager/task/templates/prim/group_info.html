@@ -1,0 +1,64 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}زیر وظیفه ها{% endblock %}
+
+{% load task_manager_tags %}
+
+{% block content %}
+   <h3>جدول مدیریت زیر وظایف گروه {{group.title}}</h3>
+   </hr>
+   <table border="1" cellspacing="0" cellpadding="5">
+      <tr>
+         <th>عنوان زیر وظیفه</th>
+         <th>توضیحات زیر وظیفه</th>
+         <th>مهلت</th>
+         <th>آیا این زیروظیفه مهم شده؟</th>
+         <th>آیا این زیر وظیفه انجام شده؟</th>
+         <th>آیا این زیر وظیفه فراموش شده؟</th>
+         <th>عملیات</th>
+         <th>کنترل</th>
+      </tr>
+        {% for task in tasks %}
+          <tbody class="task-part" data-task-id="{{task.id}}">
+           <tr>
+           <td><a href="{% url 'task:task_reminders' id=task.id %}">{{task.title}}</a></td>
+           <td>{{task.info|truncatewords:4}}</td>
+           <td>{{task.last_time}}</td>
+           <td>{{task.is_important|translate_bool}}</td>
+           <td><p class="task-done-status-{{task.id}}">{{task.is_done|translate_bool}}</p></td>
+           <td>{{task.is_miss|translate_bool}}</td>
+           <td><p><a href="{% url 'task:edit_task' id=task.id g_id=group.id %}">ویرایش زیر وظیفه</a></p>
+               <p><a href="{% url 'task:create_reminder' id=task.id g_id=group.id %}">ایجاد یادآور برای این زیر وظیفه</a></p>
+               <p><a href="{% url 'task:del_task' id=task.id g_id=group.id %}">حذف این زیر وظیفه</a></p>
+           </td>
+           {% if task.is_done %}
+           <td><input type="checkbox" class="check-done" checked></td>
+           {% else %}
+           <td><input type="checkbox" class="check-done"></td>
+           {% endif %}
+           </tr>
+         </tbody>
+        {% endfor %}
+   </table>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script>
+      $(document).ready(function(){
+         $('.check-done').click(function(){
+            TaskId = $(this).closest('.task-part').data('task-id');
+
+            $.ajax({
+               type: 'POST',
+               url: '{% url "task:check_box" %}',
+               data: {'csrfmiddlewaretoken': '{{csrf_token}}', 'task_id': TaskId},
+
+               success: function(data){
+                  $('.task-done-status-' + TaskId).text(data.is_done);
+               },
+            });
+         });
+      });
+   </script>
+
+{% endblock %}

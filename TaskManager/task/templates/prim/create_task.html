@@ -1,0 +1,12 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}ساخت زیر وظیفه{% endblock %}
+
+{% block content %}
+   <h3>فرم ساخت زیر وظیفه برای گروه وظایف {{group.title}}</h3>
+   <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ساخت وظیفه">
+   </form>
+{% endblock %}

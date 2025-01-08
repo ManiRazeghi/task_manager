@@ -1,0 +1,14 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}اعلان های وظیفه{% endblock %}
+
+
+{% block content %}
+   <h3>اعلان های وظیفه امروز به تاریخ: {{now_time}}</h3>
+   {% for target in targets %}
+      <p><a href="{% url 'task:group_info' id=target.task.group.id %}"><b>{{target.task.title}}</b></a></p>
+      <hr/>
+   {% empty %}
+      <p>بدون اعلان</p>
+   {% endfor %}
+{% endblock %}

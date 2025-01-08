@@ -1,0 +1,26 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}جدول یادآوری{% endblock %}
+
+{% block content %}
+   <h3>جدول زمان های یادآوری زیر وظیفه:</h3>
+   <h3>{{task.title}}</h3>
+   </hr>
+   <table border="1" cellspacing="0" cellpadding="5">
+    <tr>
+      <th>متن یادآور</th>
+      <th>زمان</th>
+      <th>عملیات</th>
+    </tr>
+    {% for reminder in reminders %}
+       <tr>
+         <td>{{reminder.title}}</td>
+         <td>{{reminder.reminder}}</td>
+         <td>
+            <p><a href="{% url 'task:edit_reminder' id=reminder.id t_id=task.id %}">ویرایش یادآور</a></p>
+            <p><a href="{% url 'task:del_reminder' id=reminder.id t_id=task.id %}">حذف یادآور</a></p>
+         </td>
+       </tr>
+    {% endfor %}
+   </table>
+{% endblock %}

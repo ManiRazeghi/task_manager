@@ -1,0 +1,16 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}ورود کاربر{% endblock %}
+
+{% block content %}
+   <h3>فرم ورود کاربر</h3>
+   <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{next}}">
+    <input type="submit" value="ورود">
+   </form>
+   </hr>
+   <p><a href="{% url 'account:save_user' %}">حساب کاربری ندارید؟ ثبت نام</a></p>
+   <p><a href="{% url 'account:reset_password' %}">بازیابی رمز ورود</a></p>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}ایمیل به پشتیبانی{% endblock %}
+
+{% block content %}
+   <h3>فرم ایمیل برای پشتیبانی</h3>
+   {% if sent %}
+      <p><b><mark>ایمیل شما با موفقیت به پشتیبانی ارسال شد</mark></b></p>
+   {% endif %}
+   <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ارسال ایمیل">
+   </form>
+{% endblock %}

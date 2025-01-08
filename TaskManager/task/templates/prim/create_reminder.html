@@ -1,0 +1,14 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}ساخت یادآور{% endblock %}
+
+{% block content %}
+<h3>ساخت یادآور برای زیر وظیفه:</h3>
+<h3>{{task.title}}</h3>
+</hr>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ساخت یادآور">
+</form>
+{% endblock %}

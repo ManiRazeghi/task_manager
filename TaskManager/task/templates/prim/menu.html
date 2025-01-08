@@ -1,0 +1,12 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}منو{% endblock %}
+
+{% block content %}
+   <h3>به مدیریت وظایف خوش آمدید</h3>
+   {% if request.user.is_authenticated %}
+   <p><a href="{% url 'task:order_task' %}"><b>مدیریت وظیفه</b></a></p>
+   {% else %}
+   <p>برای استفاده از این وب اپ ابتدا <a href="{% url 'account:login_user' %}"><b>وارد</b></a> شوید</p>
+   {% endif %}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}تعریف وظیفه{% endblock %}
+
+{% load task_manager_tags %}
+
+{% block content %}
+   <h3>جدول مدیریت ساخت وظایف</h3>
+   <p><a href="{% url 'task:create_group' %}"><b>ساخت گروه وظیفه جدید</b></a></p>
+   </hr>
+   <table border="1" cellspacing="0" cellpadding="5">
+      <tr>
+         <th>گروه وظایف</th>
+         <th>تعداد وظایف موجود</th>
+         <th>تعداد وظایف مهم</th>
+         <th>تعداد وظایف انجام شده</th>
+         <th>تعداد وظایفی که مهلتشان تمام شده</th>
+         <th>عملیات</th>
+      </tr>
+        {% for group in task_groups %}
+           <tr>
+           <td><a href="{% url 'task:group_info' id=group.id %}">{{group.title}}</a></td>
+           <td>{{group.tasks.count}}</td>
+           <td>{% important_tasks_count group %}</td>
+           <td>{% isdone_tasks_count group %}</td>
+           <td>{% ismiss_tasks_count group %}</td>
+           <td><p><a href="{% url 'task:edit_group' id=group.id %}">ویرایش عنوان گروه وظیفه</a></p>
+               <p><a href="{% url 'task:create_task' id=group.id %}">ایجاد زیر وظیفه برای این گروه</a></p>
+               <p><a href="{% url 'task:del_group' id=group.id %}">حذف این گروه وظیفه(تمامی زیر وظایف پاک میشود)</a></p>
+           </td>
+           </tr>
+        {% endfor %}
+   </table>
+{% endblock %}

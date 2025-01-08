@@ -1,0 +1,15 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}حساب کاربری{% endblock %}
+
+{% block content %}
+<h2>اطلاعات کاربری</h2>
+<p><b>نام کاربری: </b>{{request.user.username}}</p>
+<p><b>ایمیل: </b>{{request.user.email}}</p>
+</hr>
+<h2>عملیات</h2>
+<p><a href="{% url 'account:edit_user' %}">ویرایش اطلاعات کاربری</a></p>
+<p><a href="{% url 'account:change_password' %}">تغییر رمز</a></p>
+<p><a href="{% url 'account:task_analyse' %}">آنالیز کارهای من</a></p>
+<p><a href="{% url 'account:logout_user' %}"><mark>خروج از حساب</mark></a></p>
+{% endblock %}

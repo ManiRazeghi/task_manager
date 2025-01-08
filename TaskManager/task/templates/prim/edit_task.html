@@ -1,0 +1,14 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}ویرایش زیر وظیفه{% endblock %}
+
+{% block content %}
+<h3>ویرایش زیر وظیفه:</h3>
+<h3>{{task.title}}</h3>
+</hr>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ویرایش زیروظیفه">
+</form>
+{% endblock %}

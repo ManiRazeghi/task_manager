@@ -1,0 +1,7 @@
+{% if request.user.is_authenticated %}
+   <p><a href="{% url 'account:profile' %}"><b>حساب من</b></a></p>
+   <p><a href="{% url 'task:alarm' %}"><b>اعلان های وظیفه</b></a></p>
+   </hr>
+{% endif %}
+<p><a href="{% url 'task:menu' %}">صفحه اصلی</a></p>
+<p><a href="{% url 'task:cover' %}"><mark>پشتیبانی</mark></a></p>

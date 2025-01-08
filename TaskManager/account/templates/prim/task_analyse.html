@@ -1,0 +1,18 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}آنالیز وظایف من{% endblock %}
+
+{% load task_manager_tags %}
+
+{% block content %}
+   <h3>آنالیز وظایف شما</h3>
+   <p><b>تعداد وظیفه ساخته شده: </b>{{total_tasks}}</p>
+   <p><b>تعداد وظیفه انجام شده: </b>{{done_tasks}}</p>
+   <p><b>تعداد وظیفه فراموش شده: </b>{{miss_tasks}}</p>
+   </hr>
+   {% if total_tasks %}
+      <p><b>شما {% calc_percent total=total_tasks part=done_tasks %} درصد از وظایف خود را انجام داده اید</b></p>
+      <p><b>شما {% calc_percent total=total_tasks part=miss_tasks %} درصد از وظایف خود را فراموش کردید</b></p>
+      <p><b> درصد از وظایف شما باقی مانده {% show_other_percent total=total_tasks dones=feeds %}</b></p>
+   {% endif %}
+{% endblock %}
