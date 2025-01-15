@@ -31,5 +31,5 @@ class UserAdmin(UserAdmin):
 
 
     add_fieldsets = (
-        ('information', {'fields': ('username', 'email', 'is_superuser', 'is_active')}),
+        ('information', {'fields': ('username', 'email', 'is_superuser', 'is_active', 'password1', 'password2')}),
     )
